@@ -1,0 +1,288 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+:root {
+  --primary-color: #001122;
+  --secondaryBackground: #171c48;
+  --text: #020218;
+  --purple: #414fe9;
+  --teal: #24feee;
+  --blue: #6792e3;
+}
+
+body {
+  background-image: url("assets/BackImg.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  place-content: center;
+  place-items: center;
+  width: 100%;
+  height: 92vh;
+}
+
+.form-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(20px);
+  padding: 40px;
+  width: clamp(300px, 80%, 500px);
+  margin-top: 20px;
+}
+
+.form-container h1 {
+  font-size: clamp(32px, 5vw, 45px);
+  font-weight: bold;
+  color: white;
+  margin-bottom: 50px;
+}
+
+.form-container form {
+  display: flex;
+  width: 100%;
+  gap: 5px;
+  align-items: center;
+}
+
+.bottom {
+  border: 1px solid #5a66ab;
+  margin: 15px 0;
+  width: 100%;
+}
+
+.form-container input {
+  background-color: transparent;
+  border: 1px solid var(--primary-color);
+  flex: 1;
+  padding: 17px;
+  border-radius: 50px;
+  outline: none;
+  color: #fff;
+}
+
+.form-container button {
+  width: clamp(40px, 5vw, 50px);
+  height: clamp(40px, 5vw, 50px);
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.form-container button i {
+  font-size: clamp(20px, 5vw, 28px);
+}
+
+/*********   todo list   **********/
+#todoList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+  margin-top: 30px;
+  max-height: 40vh;
+  overflow-y: auto;
+}
+
+#todoList::-webkit-scrollbar {
+  display: none;
+}
+
+#todoList li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background-color: var(--primary-color);
+  padding: 17px 25px;
+  border-radius: 30px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.todo-text {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.text {
+  font-size: clamp(17.5px, 4vw, 20px);
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+/* Custom checkbox */
+.custom-checkbox {
+  width: clamp(17px, 4vw, 18px) !important;
+  height: clamp(17px, 4vw, 18px) !important;
+  border: 1px solid #ccc;
+  border-radius: 50%; /* Circle */
+  background-color: transparent;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+
+/* Checked state (adds blue dot) */
+input[type="checkbox"]:checked + .custom-checkbox {
+  border-color: var(--teal);
+}
+
+input[type="checkbox"]:checked + .custom-checkbox::after {
+  content: "";
+  width: 9px;
+  height: 9px;
+  background-color: var(--teal);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+input[type="checkbox"]:checked ~ .text {
+  text-decoration: line-through;
+  color: var(--teal);
+}
+
+.icon-buttons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 15px;
+}
+
+.edit {
+  color: var(--blue);
+}
+
+.delete {
+  color: red;
+}
+
+#emptyImage {
+  display: none;
+}
+
+#emptyImage img {
+  width: clamp(100px, 40vw, 200px);
+  height: auto;
+  margin-top: 30px;
+}
+
+/*******    Toast container   *******/
+#toastBox {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.toast {
+  width: clamp(250px, 50vw, 300px);
+  height: clamp(60px, 5vw, 80px);
+  background-color: #fff;
+  font-weight: 500;
+  font-size: clamp(15px, 4vw, 18px);
+  margin: 5px 0;
+  display: flex;
+  align-items: center;
+  position: relative;
+  transform: translateX(100%);
+  animation: moveleft 0.1s linear forwards;
+}
+
+@keyframes moveleft {
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.toast::after {
+  position: absolute;
+  content: "";
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 5px;
+  background-color: green;
+  animation: anim 2s linear forwards;
+}
+
+.toast.error::after {
+  background-color: red;
+  animation: anim 2s linear forwards;
+}
+
+@keyframes anim {
+  100% {
+    width: 0;
+  }
+}
+
+.success i {
+  color: green;
+  font-size: 25px;
+  margin: 0 15px;
+}
+
+.error i {
+  color: red;
+  font-size: 25px;
+  margin: 0 20px;
+}
+
+@media only screen and (max-width: 600px) {
+  .form-container {
+    padding: 30px 25px;
+  }
+
+  .bottom {
+    margin: 10px 0;
+  }
+
+  .form-container input {
+    padding: 14px;
+  }
+
+  #todoList li {
+    padding: 14px 20px;
+  }
+
+  .icon-buttons {
+    gap: 15px;
+    font-size: 14px;
+  }
+
+  #todoList li {
+    cursor: none;
+  }
+
+  .success i {
+    font-size: 20px;
+  }
+
+  .error i {
+    font-size: 20px;
+  }
+}
